@@ -1,0 +1,11 @@
+brian/ctrl/sine.sp
+brian/ctrl/randh.sp
+brian/ctrl/randi.sp
+brian/ctrl/jitter.sp
+brian/ctrl/tog.sp
+brian/ctrl/tenv.sp
+brian/ctrl/50.sp
+brian/ctrl/75.sp
+brian/ctrl/25.sp
+brian/ctrl/randi2.sp
+brian/ctrl/sinemod.sp

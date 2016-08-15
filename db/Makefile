@@ -1,4 +1,4 @@
-OBJ= hash.o jsmn.o sketches.o val.o array.o \
+OBJ= jsmn.o sketches.o val.o array.o \
 	 htable.o list.o main.o json.o db.o
 
 default: briandb

@@ -31,13 +31,10 @@ int brian_get_max_id(brian_data *bd, char *name, brian_uint *id)
         -1, 
         &stmt, NULL);
     int rc = BRIAN_NOT_OK;
-    if(sqlite3_step(stmt) != SQLITE_DONE) {
-        *id = 0;
-        rc = BRIAN_NOT_OK;
-    } else {
-        *id = sqlite3_column_int(stmt, 0);
-        rc = BRIAN_OK;
-    }
+    sqlite3_step(stmt);
+    /* TODO: error handling */
+    *id = sqlite3_column_int(stmt, 0);
+    rc = BRIAN_OK;
     sqlite3_finalize(stmt);
 
     return rc;
@@ -47,7 +44,6 @@ int brian_get_sketch_id(brian_data *bd, char *name, brian_uint *id)
 {
     char msg[256];
     sprintf(msg, "SELECT id FROM sketches WHERE(name=\"%s\");", name);
-    printf("SQL statement is\n\t%s\n", msg);
     sqlite3_stmt *stmt;
     sqlite3_prepare_v2(
         bd->db, 
@@ -82,7 +78,6 @@ brian_uint brian_insert(brian_data *bd,
     brian_uint id;
     
     if(brian_htable_search(&bd->sketch_data, tabname, len, &val) == BRIAN_OK) {
-        printf("found table '%s'\n", tabname);
         sktch = val->ud;
     } else {
         printf("could not find table %s!\n", tabname);
@@ -97,7 +92,6 @@ brian_uint brian_insert(brian_data *bd,
         tmp = entry->val.ud;
         p = tmp->val.ud; 
         if(p->val.type == BRIAN_HTABLE) {
-            printf("found another HTABLE called %s\n", p->key);
             brian_htable *ht = p->val.ud;
 
             brian_uint sketch_id = 123;
@@ -137,8 +131,6 @@ int brian_parse_filename(brian_data *bd, char *filename)
     strncpy(bd->timestamp, 
         filename + size + 1, 
         (pmatch[2].rm_eo - pmatch[2].rm_so));
-    printf("the name is %s, the timestamp is %s\n", 
-        bd->name, bd->timestamp);
     regfree(&reg);
     return BRIAN_OK;
 }

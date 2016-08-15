@@ -1,0 +1,8 @@
+if [ "$#" -eq 0 ]
+then
+    echo "usage: $0 filename.sp"
+    exit
+fi
+NAME=${1%.sp}
+echo $NAME
+sed -i "s/_\([a-zA-Z0-9]*\) /_\1$NAME /g" $NAME.sp
