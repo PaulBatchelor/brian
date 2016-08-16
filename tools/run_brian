@@ -1,0 +1,12 @@
+TITLE=$(lua brian/giblang.lua)
+BRIANOUT=smp/brian
+NAME=$BRIANOUT/$TITLE-$(date +%F_%H%M)
+WAV=$NAME.wav
+LOG=$NAME.json
+NCHAN=1
+DUR=$(perl -e "print int(5 + rand(55))")
+echo I am creating a new composition. I call it \"$TITLE\"
+sporth -d "$DUR"s -b raw -c $NCHAN brian.sp 2> $LOG |\
+sox -t raw -r 44100 -b 32 -e floating-point -c $NCHAN - $WAV fade q 1 $DUR
+
+./brian/db/briandb $LOG brian/brian.db
