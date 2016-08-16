@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <sqlite3.h>
 #include <regex.h>
+#include <libgen.h>
 #include "brian.h"
 
 int brian_db_open(brian_data *bd, char *dbname)
@@ -120,16 +121,17 @@ int brian_parse_filename(brian_data *bd, char *filename)
 {
     regex_t reg;
     regmatch_t pmatch[3];
+    char *base = basename(filename);
     char *str = "(.*)"
     "-([0-9][0-9][0-9][0-9]"
     "-[0-9][0-9]-[0-9][0-9]"
     "_[0-9][0-9][0-9][0-9])\\.json";
     regcomp(&reg, str, REG_EXTENDED);
-    regexec(&reg, filename, 3, pmatch, 0);
+    regexec(&reg, base, 3, pmatch, 0);
     size_t size = (pmatch[1].rm_eo - pmatch[1].rm_so);
-    strncpy(bd->name, filename, size);
+    strncpy(bd->name, base, size);
     strncpy(bd->timestamp, 
-        filename + size + 1, 
+        base+ size + 1, 
         (pmatch[2].rm_eo - pmatch[2].rm_so));
     regfree(&reg);
     return BRIAN_OK;

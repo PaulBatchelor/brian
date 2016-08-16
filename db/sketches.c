@@ -61,7 +61,6 @@ static int tbl_brian(brian_data *bd, brian_array *ar)
 static int tbl_fm2(brian_data *bd, brian_array *ar)
 {
     /* clock, probability, release, feedback */ 
-    printf("now we are at fm2!\n");
     brian_val tmp = get_val(&ar->val[0]);
     char *clock = tmp.ud;
     tmp = get_val(&ar->val[1]);

@@ -35,7 +35,6 @@ static int parse_token(brian_data *bd, char *str, jsmntok_t *t, brian_uint i)
                 tbl);
             brian_htable *prev = bd->ht;
             bd->ht = tbl;
-            printf("the size of the object is %d\n", t[i + 1].size);
             for(j = 0; j < t[i + 1].size * 2; j +=2 ) {
                 j += parse_token(bd, str, t, j + i +2);
             }
