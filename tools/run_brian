@@ -1,3 +1,4 @@
+#!/bin/bash 
 TITLE=$(lua brian/giblang.lua)
 BRIANOUT=smp/brian
 NAME=$BRIANOUT/$TITLE-$(date +%F_%H%M)
@@ -5,8 +6,31 @@ WAV=$NAME.wav
 LOG=$NAME.json
 NCHAN=1
 DUR=$(perl -e "print int(5 + rand(55))")
+FILE=brian/brian.sp
 echo I am creating a new composition. I call it \"$TITLE\"
-sporth -d "$DUR"s -b raw -c $NCHAN brian.sp 2> $LOG |\
+sporth -d "$DUR"s -b raw -c $NCHAN $FILE 2> $LOG |\
 sox -t raw -r 44100 -b 32 -e floating-point -c $NCHAN - $WAV fade q 1 $DUR
 
 ./brian/db/briandb $LOG brian/brian.db
+
+OYSTTYER="perl oysttyer/oysttyer.pl"
+
+tweet() {
+    echo $1 | $OYSTTYER
+}
+
+CLYPIT_URL=$(./brian/tools/clypit $WAV | tr -d '"')
+
+PHRASES=(
+"I made this:"
+"I call this one $TITLE:"
+"$TITLE."
+"Working on something called $TITLE"
+"@yesthisispaul check it out! $TITLE"
+)
+
+gen_phrase(){
+    echo ${PHRASES[$(shuf -i 0-$(expr ${#PHRASES[@]} - 1) -n 1)]}
+}
+
+tweet "$(gen_phrase) $CLYPIT_URL"

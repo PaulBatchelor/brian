@@ -1,0 +1,7 @@
+if [ "$#" -eq 0 ] 
+then
+echo "Wrong"
+exit
+fi
+URL='https://upload.clyp.it/upload'
+curl -X POST -F "audioFile=@\"$1\"" $URL | jq ".Url"
