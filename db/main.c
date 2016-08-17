@@ -58,10 +58,10 @@ int main(int argc, char *argv[])
     brian_get_max_id(&bd, "brian", &bd.id);
     bd.id++;
 
-    brian_uint tmp = 123456;
-    if(brian_get_sketch_id(&bd, "fm2", &tmp) != BRIAN_OK) {
-        fprintf(stderr, "couldn't find an ID\n");
-    }
+    //brian_uint tmp = 123456;
+    //if(brian_get_sketch_id(&bd, "fm2", &tmp) != BRIAN_OK) {
+    //    fprintf(stderr, "couldn't find an ID\n");
+    //}
 
     brian_insert(&bd, lst, entry, "brian", 5);
     brian_db_close(&bd); 
