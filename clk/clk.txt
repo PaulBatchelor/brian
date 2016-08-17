@@ -3,3 +3,7 @@ brian/clk/clk2.sp
 brian/clk/clk3.sp
 brian/clk/clk4.sp
 brian/clk/clk5.sp
+brian/clk/clk6.sp
+brian/clk/16shuf.sp
+brian/clk/16straight.sp
+brian/clk/morf.sp

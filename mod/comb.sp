@@ -1,2 +1,2 @@
 # a comb filter...
-0.8 2.0 rand 0.05 0.001 rand comb
+0.8 2.0 rand 0.05 0.01 rand comb
