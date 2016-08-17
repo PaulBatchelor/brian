@@ -2,10 +2,10 @@
 _dbkltz "db/brian.db" cdbload
 _ctlkltz 20 "ctrl" _dbkltz cdb slist
 
-_ctlkltz slick "tempo" print load 0.5 port 0 pset
-_ctlkltz slick "probability" print load 1 pset
-_ctlkltz slick "feedback" print load 2 pset
-_ctlkltz slick "resonance" print load 0.5 port 3 pset
+[ _ctlkltz slick "tempo" print load ] 0.5 port 0 pset
+[ _ctlkltz slick "probability" print ] load 1 pset
+[ _ctlkltz slick "feedback" print load ] 2 pset
+[ _ctlkltz slick "resonance" print load ] 0.5 port 3 pset
 
 ##: # kLtz
 ##: kLtz is a patch I wrote for Aure demonstrating one way I use

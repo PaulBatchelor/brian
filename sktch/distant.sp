@@ -17,16 +17,16 @@ _sqdistant 20 "seq" _dbdistant cdb slist
 ##: 
 ##: ## Table generation
 
-_ctldistant slick "pitch" print load 0.1 1.5 rand port 0 pset 
-_ctldistant slick "tempo" print load 1 pset 
-_ctldistant slick "brightness" print load 2 pset 
-_ctldistant slick "detune" print load 1 4 rand port 0 0.4 scale 3 pset 
+[ _ctldistant slick "pitch" print load ] 0.1 1.5 rand port 0 pset 
+[ _ctldistant slick "tempo" print load ] 1 pset 
+[ _ctldistant slick "brightness" print load ] 2 pset 
+[ _ctldistant slick "detune" print load ] 1 4 rand port 0 0.4 scale 3 pset 
 
 ##: First begin by generating a sequence called *seq*. 
 ##: These are the midi note numbers of the scale used.
 ##---
 _seqdistant 
-_sqdistant slick "seq" print
+[ _sqdistant slick "seq" print ]
 gen_vals
 ##---
 

@@ -1,7 +1,7 @@
 "mince: {" say
 _dbmince 'db/brian.db' cdbload
 _slmince 20 'sktch' _dbmince cdb slist
-_tabmince sr 5 15 rand * _slmince slick "file" print gen_sporth
+_tabmince sr 5 15 rand * [ _slmince slick ] "file" print gen_sporth
 
 _tabmince tbldur inv 
 -1 1 0.3 randi *

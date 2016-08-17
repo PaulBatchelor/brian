@@ -3,10 +3,10 @@ _dbcrystalline "db/brian.db" cdbload
 _sqcrystalline 20 "seq" _dbcrystalline cdb slist
 _ctlcrystalline 20 "ctrl" _dbcrystalline cdb slist
 
-_ctlcrystalline slick "feedback" print load 0.3 port 0 pset
-_ctlcrystalline slick "tempo" print load 0.5 port 1 pset
-_ctlcrystalline slick "drywet" print load 2 pset
-_ctlcrystalline slick "probability" print load 3 pset
+[ _ctlcrystalline slick "feedback" print load ] 0.3 port 0 pset
+[ _ctlcrystalline slick "tempo" print load ] 0.5 port 1 pset
+[ _ctlcrystalline slick "drywet" print load ] 2 pset
+[ _ctlcrystalline slick "probability" print load ] 3 pset
 
 ##: # Crystalline
 ##: Another sporthling created for the AudioKit sporth editor. It features
@@ -39,7 +39,7 @@ _tkcrystalline 2 zeros
 
 ##---
 _seqcrystalline
-_sqcrystalline slick "seq" print
+[ _sqcrystalline slick "seq" print ]
 gen_vals
 ##---
 

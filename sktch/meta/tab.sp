@@ -1,7 +1,7 @@
 "tab: {" say
 _dbtab 'db/brian.db' cdbload
 _sltab 20 'sktch' _dbtab cdb slist
-_tabtab sr 10 * _sltab slick "file" print gen_sporth
+_tabtab sr 10 * [ _sltab slick ] "file" print gen_sporth
 
 _tabtab tbldur inv 0 phasor dup
 
