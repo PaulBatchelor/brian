@@ -9,3 +9,4 @@ brian/ctrl/75.sp
 brian/ctrl/25.sp
 brian/ctrl/randi2.sp
 brian/ctrl/sinemod.sp
+brian/ctrl/drunk.sp

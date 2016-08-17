@@ -5,7 +5,7 @@ NAME=$BRIANOUT/$TITLE-$(date +%F_%H%M)
 WAV=$NAME.wav
 LOG=$NAME.json
 NCHAN=1
-DUR=$(perl -e "print int(5 + rand(55))")
+DUR=$(perl -e "print int(10 + rand(90))")
 FILE=brian/brian.sp
 echo I am creating a new composition. I call it \"$TITLE\"
 sporth -d "$DUR"s -b raw -c $NCHAN $FILE 2> $LOG |\
@@ -27,6 +27,8 @@ PHRASES=(
 "$TITLE."
 "Working on something called $TITLE"
 "@yesthisispaul check it out! $TITLE"
+"I can't let you do that, @yesthisispaul. $TITLE is on the way."
+"Made with <3 #$TITLE"
 )
 
 gen_phrase(){

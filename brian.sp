@@ -1,7 +1,7 @@
 "{" say
 
 # Comment this out to run with specific seed via -s flag
-0 4294967295 rand srand
+#0 4294967295 rand srand
 
 _db 'db/brian.db' cdbload
 _choose 5 'brian/top.txt' slist

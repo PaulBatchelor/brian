@@ -1,0 +1,10 @@
+brian/mod/revsc.sp
+brian/mod/dellong.sp
+brian/mod/delshort.sp
+brian/mod/dist.sp
+brian/mod/oct.sp
+brian/mod/glitch.sp
+brian/mod/bitcrush.sp
+brian/mod/phaser.sp
+brian/mod/zitarev.sp
+brian/mod/comb.sp

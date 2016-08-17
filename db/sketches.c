@@ -288,6 +288,117 @@ static int tbl_stretch(brian_data *bd, brian_array *ar)
     return BRIAN_OK;
 }
 
+static int tbl_crystalline(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO crystalline VALUES(NULL,?,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+    tmp = get_val(&ar->val[0]);
+    char *feedback = tmp.ud;
+    sqlite3_bind_text(stmt, 2, 
+        feedback, strlen(feedback), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[1]);
+    char *tempo = tmp.ud;
+    sqlite3_bind_text(stmt, 3, 
+        tempo, strlen(tempo), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[2]);
+    char *drywet = tmp.ud;
+    sqlite3_bind_text(stmt, 4, 
+        drywet, strlen(drywet), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[3]);
+    char *probability = tmp.ud;
+    sqlite3_bind_text(stmt, 5, 
+        probability, strlen(probability), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[4]);
+    char *seq = tmp.ud;
+    sqlite3_bind_text(stmt, 6, 
+        seq, strlen(seq), SQLITE_STATIC); 
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
+static int tbl_kltz(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO kltz VALUES(NULL,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+    tmp = get_val(&ar->val[0]);
+    char *tempo = tmp.ud;
+    sqlite3_bind_text(stmt, 2, 
+        tempo, strlen(tempo), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[1]);
+    char *probability = tmp.ud;
+    sqlite3_bind_text(stmt, 3, 
+        probability, strlen(probability), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[2]);
+    char *feedback = tmp.ud;
+    sqlite3_bind_text(stmt, 4, 
+        feedback, strlen(feedback), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[3]);
+    char *resonance = tmp.ud;
+    sqlite3_bind_text(stmt, 5, 
+        resonance, strlen(resonance), SQLITE_STATIC); 
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
+static int tbl_distant(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO distant VALUES(NULL,?,?,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+    tmp = get_val(&ar->val[0]);
+    char *pitch = tmp.ud;
+    sqlite3_bind_text(stmt, 2, 
+        pitch, strlen(pitch), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[1]);
+    char *tempo = tmp.ud;
+    sqlite3_bind_text(stmt, 3, 
+        tempo, strlen(tempo), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[2]);
+    char *brightness = tmp.ud;
+    sqlite3_bind_text(stmt, 4, 
+        brightness, strlen(brightness), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[3]);
+    char *detune = tmp.ud;
+    sqlite3_bind_text(stmt, 5, 
+        detune, strlen(detune), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[4]);
+    char *seq = tmp.ud;
+    sqlite3_bind_text(stmt, 6, 
+        seq, strlen(seq), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[5]);
+    char *key = tmp.ud;
+    sqlite3_bind_text(stmt, 7, 
+        key, strlen(key), SQLITE_STATIC); 
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
 static brian_sketch sketches[] = {
     {"brian", 5, tbl_brian},
     {"fm2", 4, tbl_fm2},
@@ -296,6 +407,9 @@ static brian_sketch sketches[] = {
     {"mince", 3, tbl_mince},
     {"tab", 3, tbl_tab},
     {"stretch", 3, tbl_stretch},
+    {"crystalline", 5, tbl_crystalline},
+    {"kltz", 4, tbl_kltz},
+    {"distant", 6, tbl_distant},
     {NULL, 0, NULL},
 };
 
