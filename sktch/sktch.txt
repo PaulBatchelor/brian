@@ -4,4 +4,4 @@ brian/sktch/plk.sp
 brian/sktch/crystalline.sp
 brian/sktch/kltz.sp
 brian/sktch/distant.sp
-brian/sktch/meta/stretch.sp
+brian/sktch/stars.sp

@@ -441,6 +441,51 @@ static int tbl_mold(brian_data *bd, brian_array *ar)
     return BRIAN_OK;
 }
 
+static int tbl_stars(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO stars VALUES(NULL,?,?,?,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+    tmp = get_val(&ar->val[0]);
+    char *seq = tmp.ud;
+    sqlite3_bind_text(stmt, 2, 
+        seq, strlen(seq), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[1]);
+    char *atk = tmp.ud;
+    sqlite3_bind_text(stmt, 3, 
+        atk, strlen(atk), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[2]);
+    char *rel = tmp.ud;
+    sqlite3_bind_text(stmt, 4, 
+        rel, strlen(rel), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[3]);
+    char *key = tmp.ud;
+    sqlite3_bind_text(stmt, 5, 
+        key, strlen(key), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[4]);
+    char *tempo = tmp.ud;
+    sqlite3_bind_text(stmt, 6, 
+        tempo, strlen(tempo), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[5]);
+    char *fx = tmp.ud;
+    sqlite3_bind_text(stmt, 7, 
+        fx, strlen(fx), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[6]);
+    char *rev_cutoff = tmp.ud;
+    sqlite3_bind_text(stmt, 8, 
+        rev_cutoff, strlen(rev_cutoff), SQLITE_STATIC); 
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
 static brian_sketch sketches[] = {
     {"brian", 5, tbl_brian},
     {"fm2", 4, tbl_fm2},
@@ -453,6 +498,7 @@ static brian_sketch sketches[] = {
     {"kltz", 4, tbl_kltz},
     {"distant", 6, tbl_distant},
     {"mold", 6, tbl_mold},
+    {"stars",7, tbl_stars},
     {NULL, 0, NULL},
 };
 
