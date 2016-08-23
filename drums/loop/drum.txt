@@ -1,0 +1,5 @@
+brian/drums/loop/909.sp
+brian/drums/loop/mt100.sp
+brian/drums/loop/tr707.sp
+brian/drums/loop/rhythm80.sp
+brian/drums/loop/jomox.sp

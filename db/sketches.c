@@ -486,6 +486,47 @@ static int tbl_stars(brian_data *bd, brian_array *ar)
     return BRIAN_OK;
 }
 
+static int tbl_loop(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO loop VALUES(NULL,?,?,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+    tmp = get_val(&ar->val[0]);
+    char *tempo = tmp.ud;
+    sqlite3_bind_text(stmt, 2, 
+        tempo, strlen(tempo), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[1]);
+    char *drum = tmp.ud;
+    sqlite3_bind_text(stmt, 3, 
+        drum, strlen(drum), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[2]);
+    char *kick = tmp.ud;
+    sqlite3_bind_text(stmt, 4, 
+        kick, strlen(kick), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[3]);
+    char *snare = tmp.ud;
+    sqlite3_bind_text(stmt, 5, 
+        snare, strlen(snare), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[4]);
+    char *hh = tmp.ud;
+    sqlite3_bind_text(stmt, 6, 
+        hh, strlen(hh), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[5]);
+    char *drumfx = tmp.ud;
+    sqlite3_bind_text(stmt, 7, 
+        drumfx, strlen(drumfx), SQLITE_STATIC); 
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
 static brian_sketch sketches[] = {
     {"brian", 5, tbl_brian},
     {"fm2", 4, tbl_fm2},
@@ -499,6 +540,7 @@ static brian_sketch sketches[] = {
     {"distant", 6, tbl_distant},
     {"mold", 6, tbl_mold},
     {"stars",7, tbl_stars},
+    {"loop",6, tbl_loop},
     {NULL, 0, NULL},
 };
 

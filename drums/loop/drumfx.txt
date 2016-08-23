@@ -1,0 +1,5 @@
+brian/drums/loop/stutcrush.sp
+brian/drums/loop/bitcrush.sp
+brian/drums/loop/jcrev.sp
+brian/drums/loop/allpass.sp
+brian/drums/loop/zitarev.sp
