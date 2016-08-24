@@ -56,6 +56,8 @@ int brian_htable_add_value(brian_htable *ht,
     brian_list_get_last(lst, &entry);
     /* TODO: make this linked list optional (by default) */
     rc = brian_list_append_entry(&ht->lst, entry);
+    //printf("key: %*.*s pos:%d\n", 
+    //    klen, klen, key, ht->lst.size);
     return rc;
 }
 

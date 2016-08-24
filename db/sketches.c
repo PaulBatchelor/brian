@@ -527,6 +527,52 @@ static int tbl_loop(brian_data *bd, brian_array *ar)
     return BRIAN_OK;
 }
 
+static int tbl_waveset(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO waveset VALUES(NULL,?,?,?,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+    tmp = get_val(&ar->val[0]);
+    char *file = tmp.ud;
+    sqlite3_bind_text(stmt, 2, 
+        file, strlen(file), SQLITE_STATIC); 
+
+    tmp = get_val(&ar->val[1]);
+    brian_uint *s_id = tmp.ud;
+    sqlite3_bind_int(stmt, 3, *s_id);
+    
+    tmp = get_val(&ar->val[2]);
+    brian_uint *f_id = tmp.ud;
+    sqlite3_bind_int(stmt, 4, *f_id);
+
+    tmp = get_val(&ar->val[3]);
+    char *stretch = tmp.ud;
+    sqlite3_bind_text(stmt, 5, 
+        stretch, strlen(stretch), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[4]);
+    char *mod = tmp.ud;
+    sqlite3_bind_text(stmt, 6, 
+        mod, strlen(mod), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[5]);
+    char *decay = tmp.ud;
+    sqlite3_bind_text(stmt, 7, 
+        decay, strlen(decay), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[6]);
+    char *amp = tmp.ud;
+    sqlite3_bind_text(stmt, 8, 
+        amp, strlen(amp), SQLITE_STATIC); 
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
 static brian_sketch sketches[] = {
     {"brian", 5, tbl_brian},
     {"fm2", 4, tbl_fm2},
@@ -539,8 +585,9 @@ static brian_sketch sketches[] = {
     {"kltz", 4, tbl_kltz},
     {"distant", 6, tbl_distant},
     {"mold", 6, tbl_mold},
-    {"stars",7, tbl_stars},
-    {"loop",6, tbl_loop},
+    {"stars", 7, tbl_stars},
+    {"loop", 6, tbl_loop},
+    {"waveset", 7, tbl_waveset},
     {NULL, 0, NULL},
 };
 

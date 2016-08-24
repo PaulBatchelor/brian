@@ -65,7 +65,7 @@ mix -10 ampdb *
 dup _mod slick "fx" print load -20 -10 0.3 randi ampdb * +
 
 
-dup dup 0.95 5000 10000 rand "rev_cutoff" print revsc drop -9 ampdb * +
+dup dup 0.95 5000 10000 rand "rev_cutoff" print revsc drop -9 ampdb * dcblk +
 
 0.001 0.01 -10 peaklim
 

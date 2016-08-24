@@ -9,7 +9,7 @@
 static int parse_token(brian_data *bd, char *str, jsmntok_t *t, brian_uint i)
 {
     /*this is a quick and dirty fix. look into this bug... */
-    if(i + 1> bd->json_size - 1) return 0;
+    if(i + 1 > bd->json_size - 1) return 0;
     switch(t[i + 1].type) {
         case JSMN_PRIMITIVE:
             brian_htable_add_atof(bd->ht,
@@ -35,10 +35,22 @@ static int parse_token(brian_data *bd, char *str, jsmntok_t *t, brian_uint i)
                 tbl);
             brian_htable *prev = bd->ht;
             bd->ht = tbl;
+            //printf("OBJ_START: %*.*s\n", 
+            //    t[i].end - t[i].start,
+            //    t[i].end - t[i].start,
+            //    &str[t[i].start]
+            //    );
             for(j = 0; j < t[i + 1].size * 2; j +=2 ) {
-                j += parse_token(bd, str, t, j + i +2);
+                //printf("j is %d\n", j);
+                parse_token(bd, str, t, j + i +2);
+                //j += parse_token(bd, str, t, j + i +2);
             }
             bd->ht = prev;
+            //printf("OBJ_END: %*.*s\n", 
+            //    t[i].end - t[i].start,
+            //    t[i].end - t[i].start,
+            //    &str[t[i].start]
+            //    );
             return j;
             break;
         }

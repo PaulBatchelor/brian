@@ -6,7 +6,7 @@ WAV=$NAME.wav
 LOG=$NAME.json
 SP=$NAME.sp
 NCHAN=1
-DUR=$(perl -e "print int(10 + rand(90))")
+DUR=$(perl -e "print int(10 + rand(60))")
 FILE=brian/brian.sp
 echo I am creating a new composition. I call it \"$TITLE\"
 sporth -d "$DUR"s -b raw -c $NCHAN $FILE 2> $LOG |\
