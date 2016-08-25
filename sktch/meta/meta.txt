@@ -3,3 +3,4 @@ brian/sktch/meta/mince.sp
 brian/sktch/meta/stretch.sp
 brian/sktch/meta/stretch.sp
 brian/sktch/meta/waveset.sp
+brian/sktch/meta/starloop.sp
