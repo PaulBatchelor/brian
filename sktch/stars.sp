@@ -60,7 +60,7 @@ gbuzz
 _env get *
 
 
-mix -10 ampdb *
++ + + + + -10 ampdb *
 
 dup _mod slick "fx" print load -20 -10 0.3 randi ampdb * +
 

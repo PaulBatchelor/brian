@@ -573,6 +573,41 @@ static int tbl_waveset(brian_data *bd, brian_array *ar)
     return BRIAN_OK;
 }
 
+static int tbl_starloop(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO starloop VALUES(NULL,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+
+    sqlite3_bind_int64(stmt, 1, bd->id);
+
+    tmp = get_val(&ar->val[0]);
+    brian_uint *s_id_loop = tmp.ud;
+    sqlite3_bind_int(stmt, 2, *s_id_loop);
+    
+    tmp = get_val(&ar->val[1]);
+    brian_uint *f_id_loop = tmp.ud;
+    sqlite3_bind_int(stmt, 3, *f_id_loop);
+    
+    tmp = get_val(&ar->val[2]);
+    brian_uint *s_id_star = tmp.ud;
+    sqlite3_bind_int(stmt, 4, *s_id_star);
+    
+    tmp = get_val(&ar->val[3]);
+    brian_uint *f_id_star = tmp.ud;
+    sqlite3_bind_int(stmt, 5, *f_id_star);
+
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
 static brian_sketch sketches[] = {
     {"brian", 5, tbl_brian},
     {"fm2", 4, tbl_fm2},
@@ -588,6 +623,7 @@ static brian_sketch sketches[] = {
     {"stars", 7, tbl_stars},
     {"loop", 6, tbl_loop},
     {"waveset", 7, tbl_waveset},
+    {"starloop", 4, tbl_starloop},
     {NULL, 0, NULL},
 };
 

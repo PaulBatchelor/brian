@@ -35,15 +35,17 @@ static int parse_token(brian_data *bd, char *str, jsmntok_t *t, brian_uint i)
                 tbl);
             brian_htable *prev = bd->ht;
             bd->ht = tbl;
-            //printf("OBJ_START: %*.*s\n", 
+            //printf("OBJ_START: %*.*s, size %d\n", 
             //    t[i].end - t[i].start,
             //    t[i].end - t[i].start,
-            //    &str[t[i].start]
+            //    &str[t[i].start],
+            //    t[i + 1].size 
             //    );
+            int c = 0;
+            int off = 0;
             for(j = 0; j < t[i + 1].size * 2; j +=2 ) {
-                //printf("j is %d\n", j);
-                parse_token(bd, str, t, j + i +2);
-                //j += parse_token(bd, str, t, j + i +2);
+                c = parse_token(bd, str, t, j + i + 2 + c);
+                off += c;
             }
             bd->ht = prev;
             //printf("OBJ_END: %*.*s\n", 
@@ -51,7 +53,8 @@ static int parse_token(brian_data *bd, char *str, jsmntok_t *t, brian_uint i)
             //    t[i].end - t[i].start,
             //    &str[t[i].start]
             //    );
-            return j;
+            //printf("returning j as %d, off is %d\n", j, off);
+            return j + c + off;
             break;
         }
         case JSMN_ARRAY: {

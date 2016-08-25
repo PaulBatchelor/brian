@@ -25,8 +25,8 @@ _drumfx 5 "drumfx" _db cdb slist
 _clk var
 _tempo get 2 * bpm2dur dmetro _clk set
 
-[ _drumfx slick "drumfx" print load ]
+[ _drumfx slick "drumfx" print load dcblk ]
 
-_dry get 0.1 0.9 rand cf
+_dry get 0.1 0.9 rand cf 0.7 clip -1 ampdb *
 
 "}" say
