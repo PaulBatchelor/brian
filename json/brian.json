@@ -1,0 +1,15 @@
+{
+"ctrl":"brian/ctrl/ctrl.txt",
+"seq":"brian/seq/seq.txt",
+"clk":"brian/clk/clk.txt",
+"sktch":"brian/sktch/sktch.txt",
+"meta":"brian/sktch/meta/meta.txt"
+"mod":"brian/mod/mod.txt",
+"drumfx":"brian/drums/loop/drumfx.txt",
+"drum":"brian/drums/loop/drum.txt",
+"hh":"brian/drums/loop/hh.txt",
+"kick":"brian/drums/loop/kick.txt",
+"snare":"brian/drums/loop/snare.txt",
+"tempo":"brian/drums/loop/tempo.txt"
+"bit":"brian/bit/bit.txt"
+}
