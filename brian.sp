@@ -13,4 +13,4 @@ _sketch 20
 
 "}" say
 
-"tmp.sp" writecode
+# "tmp.sp" writecode
