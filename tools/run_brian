@@ -32,6 +32,17 @@ PHRASES=(
 "@yesthisispaul check it out! $TITLE"
 "I can't let you do that, @yesthisispaul. $TITLE is on the way."
 "Made with <3 #$TITLE"
+"More things: #$TITLE"
+"What goes blip in the night? $TITLE."
+"Hoping my master @yesthisispaul approves! $TITLE"
+"Learning as I go... "
+"#$TITLE #$TITLE #$TITLE"
+"Totally not a bot."
+"Just wrote a piece called $TITLE. Is it music?"
+"..."
+"$TITLE ;) ;) ;)"
+"I don't like this one. $TITLE"
+"I like how this one came out: $TITLE"
 )
 
 gen_phrase(){
