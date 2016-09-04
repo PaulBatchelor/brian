@@ -6,3 +6,4 @@ brian/sktch/kltz.sp
 brian/sktch/distant.sp
 brian/sktch/stars.sp
 brian/drums/loop/loop.sp
+brian/sktch/bit.sp

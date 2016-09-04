@@ -608,6 +608,43 @@ static int tbl_starloop(brian_data *bd, brian_array *ar)
     return BRIAN_OK;
 }
 
+
+/*
+
+*/
+static int tbl_bit(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO bit VALUES(NULL,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+    tmp = get_val(&ar->val[0]);
+    char *ctrl = tmp.ud;
+    sqlite3_bind_text(stmt, 2, 
+        ctrl, strlen(ctrl), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[1]);
+    char *bit = tmp.ud;
+    sqlite3_bind_text(stmt, 3, 
+        bit, strlen(bit), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[2]);
+    char *mod = tmp.ud;
+    sqlite3_bind_text(stmt, 4, 
+        mod, strlen(mod), SQLITE_STATIC); 
+    tmp = get_val(&ar->val[3]);
+    char *crossfade = tmp.ud;
+    sqlite3_bind_text(stmt, 5, 
+        crossfade, strlen(crossfade), SQLITE_STATIC); 
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
 static brian_sketch sketches[] = {
     {"brian", 5, tbl_brian},
     {"fm2", 4, tbl_fm2},
@@ -624,6 +661,7 @@ static brian_sketch sketches[] = {
     {"loop", 6, tbl_loop},
     {"waveset", 7, tbl_waveset},
     {"starloop", 4, tbl_starloop},
+    {"bit",4,tbl_bit},
     {NULL, 0, NULL},
 };
 
