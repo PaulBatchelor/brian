@@ -20,7 +20,6 @@ _seq 15 'seq' _db cdb slist
 
 'scale'
 _seq slick 'sequence' print
-#'0 3 5 2 -2'
 
 gen_vals
 
