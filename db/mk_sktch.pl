@@ -12,10 +12,7 @@ sub print_var
     my $id = shift @_;
     my $sqlid = $id + 2;
     print <<END;
-    tmp = get_val(&ar->val[$id]);
-    char *$name = tmp.ud;
-    sqlite3_bind_text(stmt, $sqlid, 
-        $name, strlen($name), SQLITE_STATIC); 
+	bind_text(bd, stmt, ar, $id);
 END
 }
 

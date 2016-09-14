@@ -18,6 +18,21 @@ static brian_val get_val(brian_val *val)
     }
 }
 
+static void bind_text(brian_data *bd,
+		sqlite3_stmt *stmt, 
+		brian_array *ar,
+		int pos) {
+
+	brian_val tmp;
+	char *str;
+    tmp = get_val(&ar->val[pos]);
+	str = tmp.ud;
+    sqlite3_bind_text(stmt, pos + 2, 
+        str, strlen(str), SQLITE_STATIC); 
+}
+
+
+
 static int tbl_brian(brian_data *bd, brian_array *ar)
 {
     /* seed,top_file,sketch */
@@ -644,21 +659,6 @@ static int tbl_bit(brian_data *bd, brian_array *ar)
     
     return BRIAN_OK;
 }
-
-
-static void bind_text(brian_data *bd,
-		sqlite3_stmt *stmt, 
-		brian_array *ar,
-		int pos) {
-
-	brian_val tmp;
-	char *str;
-    tmp = get_val(&ar->val[pos]);
-	str = tmp.ud;
-    sqlite3_bind_text(stmt, pos + 2, 
-        str, strlen(str), SQLITE_STATIC); 
-}
-
 
 static int tbl_chant(brian_data *bd, brian_array *ar)
 {
