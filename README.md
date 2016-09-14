@@ -31,3 +31,10 @@ Brian will not do your counterpoint homework.
 Brian does not use MIDI. 
 Brian does not care about pop music. 
 Brian is almost formless.
+
+Dependencies:
+
+- Sporth
+- Oyster
+- SQLite
+- jq

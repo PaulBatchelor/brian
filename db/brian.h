@@ -63,6 +63,7 @@ typedef struct {
     sqlite3 *db;
     char timestamp[40];
     char name[128];
+	char write;
 } brian_data;
 
 typedef int (* brian_setter)(brian_data *, brian_array *);

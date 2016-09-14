@@ -50,8 +50,8 @@ sub header {
         print("$_ TEXT,\n");
     }
     print(");\n");
+    print("insert into sketches values(NULL, \"foo\");\n");
     print("{\"foooo\",".scalar(@arr).",tbl_fooooo}\n");
-    print("insert into sketches values(NULL, \"foo\");");
     print("*/\n");
     print <<END;
 static int tbl_foo(brian_data *bd, brian_array *ar)

@@ -112,7 +112,9 @@ brian_uint brian_insert(brian_data *bd,
         }
         entry = next;
     }
-    sktch->f(bd, &ar);
+	if(bd->write) {
+		sktch->f(bd, &ar);
+	}
     brian_array_destroy(&ar);
     return id;
 }

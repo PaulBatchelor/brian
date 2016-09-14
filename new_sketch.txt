@@ -3,21 +3,29 @@ How to make a new sketch for briandb. Really loose notes.
 - Build the sketch. Put it in brian/sktch
 - Open up brian/db/sketches.c 
 - If you aren't making a metasketch, the automated script does
-most of the work. In vim. run :r !sh brian/db/mk_sktch.sh your_sketch_path.sp
-- Re-order SQL commands in comment (should be fixed later)
+most of the work. 
+- In vim. run :r !sh brian/db/mk_sktch.sh your_sketch_path.sp
+
 - Replace "foo" with the name of your sketch: the function, SQL statement,
 The two SQL commands, the struct entry
-- In the comment generated, remove the last common in the SQL statement
+- In the comment generated, remove the last comma in the SQL statement
 - In the struct entry, make sure the function and sketch name are
 correct
+
 - Select the SQL commands in vim in visual mode. run !sqlite3 brian/brian.db
 If all succeeds, they will disappear without fuss
 - Place struct entry at second-to-last position (NULL is always last)
 - Go into brian/db and recompile with "make"
+
 - Use a test file and insert the JSON data from your sketch in the
 following way: r !sporth -n your_sketch_path.sp
+
+- test out briandb: ./brian/db/briandb -t your_test.json brian/brian.db
+- if all went well, do it again:
 - test out briandb: ./brian/db/briandb your_test.json brian/brian.db
 - if all went well.. verify with sqlite. 
+
+
 - remove bogus entries
 - add new sketch to brian/sktch/sktch.txt
 - add new files to git and commit

@@ -645,6 +645,42 @@ static int tbl_bit(brian_data *bd, brian_array *ar)
     return BRIAN_OK;
 }
 
+
+static void bind_text(brian_data *bd,
+		sqlite3_stmt *stmt, 
+		brian_array *ar,
+		int pos) {
+
+	brian_val tmp;
+	char *str;
+    tmp = get_val(&ar->val[pos]);
+	str = tmp.ud;
+    sqlite3_bind_text(stmt, pos + 2, 
+        str, strlen(str), SQLITE_STATIC); 
+}
+
+
+static int tbl_chant(brian_data *bd, brian_array *ar)
+{
+    brian_val tmp;
+
+    sqlite3_stmt *stmt;
+    sqlite3_prepare_v2(
+         bd->db, 
+         "INSERT INTO chant VALUES(NULL,?,?,?,?,?);",
+         -1, 
+         &stmt, NULL);
+    sqlite3_bind_int64(stmt, 1, bd->id);
+	bind_text(bd, stmt, ar, 0);
+	bind_text(bd, stmt, ar, 1);
+	bind_text(bd, stmt, ar, 2);
+	bind_text(bd, stmt, ar, 3);
+    sqlite3_step(stmt);
+    sqlite3_finalize(stmt);
+    
+    return BRIAN_OK;
+}
+
 static brian_sketch sketches[] = {
     {"brian", 5, tbl_brian},
     {"fm2", 4, tbl_fm2},
@@ -662,6 +698,7 @@ static brian_sketch sketches[] = {
     {"waveset", 7, tbl_waveset},
     {"starloop", 4, tbl_starloop},
     {"bit",4,tbl_bit},
+	{"chant",4,tbl_chant},
     {NULL, 0, NULL},
 };
 
