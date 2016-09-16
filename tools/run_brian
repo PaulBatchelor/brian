@@ -8,8 +8,14 @@ SP=$NAME.sp
 NCHAN=1
 DUR=$(perl -e "print int(10 + rand(60))")
 FILE=brian/brian.sp
+SPORTH=/usr/local/bin/sporth
+echo "#######"
+date
 echo I am creating a new composition. I call it \"$TITLE\"
-sporth -d "$DUR"s -b raw -c $NCHAN $FILE 2> $LOG |\
+echo WAV: $WAV
+echo LOG: $LOG
+echo DUR: $DUR
+$SPORTH -d "$DUR"s -b raw -c $NCHAN $FILE 2> $LOG |\
 sox -t raw -r 44100 -b 32 -e floating-point -c $NCHAN - $WAV fade q 1 $DUR
 
 # mv tmp.sp $SP
@@ -22,7 +28,9 @@ tweet() {
     echo $1 | $OYSTTYER
 }
 
-CLYPIT_URL=$(./brian/tools/clypit $WAV | tr -d '"')
+CLYPIT_URL=$(./brian/tools/clypit ./$WAV | tr -d '"')
+
+echo CLYPIT_URL: $CLYPIT_URL
 
 PHRASES=(
 "I made this:"
@@ -49,4 +57,6 @@ gen_phrase(){
     echo ${PHRASES[$(shuf -i 0-$(expr ${#PHRASES[@]} - 1) -n 1)]}
 }
 
-tweet "$(gen_phrase) $CLYPIT_URL"
+THE_TWEET="$(gen_phrase) $CLYPIT_URL"
+echo $THE_TWEET
+tweet "$THE_TWEET"

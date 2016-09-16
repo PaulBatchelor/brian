@@ -4,4 +4,4 @@ echo "Wrong"
 exit
 fi
 URL='https://upload.clyp.it/upload'
-curl -X POST -F "audioFile=@\"$1\"" $URL | jq ".Url"
+/usr/bin/curl -X POST -F "audioFile=@$1" $URL | tee -a /home/pi/clypit.log | /usr/local/bin/jq ".Url"
