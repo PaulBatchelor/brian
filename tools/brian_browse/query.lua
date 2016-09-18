@@ -11,7 +11,7 @@ end
 
 function down(d)
     curses.mvprintw(d.pos, 1, " ")
-    d.pos = math.min(d.pos + 1, d.size - 1)
+    d.pos = math.min(d.pos + 1, d.size)
     curses.mvprintw(d.pos, 1, ">")
     return 1
 end
@@ -63,17 +63,21 @@ end
 
 function sel(d)
     curses.clear()
-    local name = get_sketch_name(d.rows[d.pos + 1][7])
+    local name = get_sketch_name(d.rows[d.pos][7])
     curses.attron(curses.A_BOLD())
     curses.mvprintw(0, 0, name)
     curses.attroff(curses.A_BOLD())
     local qstr = string.format("SELECT * from %s WHERE(id == %d);",
-        name, d.rows[d.pos + 1][8])
+        name, d.rows[d.pos][8])
     local qval = query(qstr) 
 
-    for k,v in pairs(qval[1]) do
-        curses.mvprintw(k, 3, v)
-    end
+    if(qval[1] == nil) then
+        curses.mvprintw(1, 3, qstr)
+    else
+        for k,v in pairs(qval[1]) do
+            curses.mvprintw(k, 3, v)
+        end
+    end 
 
     d.top_pos = d.pos
     d.pos = 1
