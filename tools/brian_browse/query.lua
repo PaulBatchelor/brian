@@ -79,6 +79,7 @@ function sel(d)
         end
     end 
 
+    d.sketch = d.rows[d.pos]
     d.top_pos = d.pos
     d.pos = 1
     curses.mvprintw(d.pos, 1, ">")
@@ -91,6 +92,19 @@ function back(d)
     d.page = 1
     curses.clear()
     print_page(d)
+    return 1
+end
+
+function get_wav_file(pfx, tbl)
+    return string.format("%s%s_%s.wav", 
+        pfx, tbl[2], tbl[3])
+end
+
+function play(d)
+    if(d.page == 2) then
+        curses.clear()
+        curses.mvprintw(0, 0, get_wav_file(d.prefix, d.sketch))
+    end
     return 1
 end
 
@@ -108,6 +122,7 @@ tbl['j'] = down
 tbl['k'] = up
 tbl['l'] = sel
 tbl['h'] = back
+tbl['p'] = play
 
 run = 1
 data = {}
@@ -116,6 +131,8 @@ data.pos = 1
 data.size = 20
 data.page = 1
 data.top_pos = 1
+data.sketch = nil
+data.prefix = ""
 
 print_page(data)
 
