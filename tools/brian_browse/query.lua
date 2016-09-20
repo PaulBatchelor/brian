@@ -132,6 +132,15 @@ function lock(d)
 return 1
 end
 
+function refresh(d)
+if(d.page == 1) then
+	local out = query("SELECT * FROM brian ORDER BY id DESC limit 20")
+	d.rows = out
+	print_page(d)
+end
+return 1
+end
+
 local out = query("SELECT * FROM brian ORDER BY id DESC limit 20")
 
 
@@ -149,6 +158,7 @@ tbl['h'] = back
 tbl['p'] = play
 tbl['s'] = stop
 tbl['L'] = lock
+tbl['r'] = refresh
 
 run = 1
 data = {}
